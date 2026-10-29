@@ -1,0 +1,10 @@
+{
+  "name": "MarineTag AI",
+  "description": "Ứng dụng bóc tách thông tin biển tên kim loại thiết bị trên tàu thủy và quản lý kho dữ liệu hàng hải.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "rec_1793148813644_c9b74971",
+    "serial_no": "2024-SN-8912A",
+    "tag_no": "02-P-101A",
+    "manufacturer": "Alfa Laval",
+    "equipment_type": "Centrifugal Cooling Pump",
+    "year": "08.08.2024",
+    "testing_press": "7.7 mwc",
+    "approval_body": "DNV",
+    "low_confidence_fields": [
+      "testing_press"
+    ],
+    "ship": "MV Vinalines Pioneer",
+    "location": "Buồng máy chính - Equipment Room 2",
+    "inspector": "phantrongkhoi1710",
+    "inspector_id": "inspector-01",
+    "scanned_at": "2026-10-28T00:53:33.644Z",
+    "image_path": "/uploads/sample_nameplate.jpg",
+    "created_at": "2026-10-28T00:53:33.644Z",
+    "updated_at": "2026-10-28T00:53:33.644Z"
+  }
+]

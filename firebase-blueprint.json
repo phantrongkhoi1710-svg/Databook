@@ -1,0 +1,142 @@
+{
+  "entities": {
+    "Record": {
+      "title": "EquipmentNameplateRecord",
+      "description": "Bản ghi trích xuất thông tin biển tên kim loại của thiết bị tàu thủy",
+      "type": "object",
+      "properties": {
+        "serial_no": {
+          "type": "string",
+          "description": "Số sê-ri của thiết bị",
+          "maxLength": 100
+        },
+        "tag_no": {
+          "type": "string",
+          "description": "Mã tag thiết bị",
+          "maxLength": 100
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Nhà sản xuất",
+          "maxLength": 150
+        },
+        "equipment_type": {
+          "type": "string",
+          "description": "Loại thiết bị",
+          "maxLength": 150
+        },
+        "year": {
+          "type": "string",
+          "description": "Ngày hoặc năm sản xuất giữ nguyên định dạng",
+          "maxLength": 50
+        },
+        "testing_press": {
+          "type": "string",
+          "description": "Áp suất thử nghiệm kèm đơn vị",
+          "maxLength": 50
+        },
+        "approval_body": {
+          "type": "string",
+          "description": "Tổ chức đăng kiểm phê duyệt",
+          "maxLength": 100
+        },
+        "low_confidence_fields": {
+          "type": "array",
+          "description": "Danh sách các trường AI nhận diện không chắc chắn",
+          "items": {
+            "type": "string",
+            "enum": [
+              "serial_no",
+              "tag_no",
+              "manufacturer",
+              "equipment_type",
+              "year",
+              "testing_press",
+              "approval_body"
+            ]
+          }
+        },
+        "ship": {
+          "type": "string",
+          "description": "Tên tàu",
+          "maxLength": 80
+        },
+        "location": {
+          "type": "string",
+          "description": "Vị trí lắp đặt thiết bị trên tàu",
+          "maxLength": 80
+        },
+        "inspector": {
+          "type": "string",
+          "description": "Tên hoặc email người kiểm tra",
+          "maxLength": 120
+        },
+        "inspector_id": {
+          "type": "string",
+          "description": "User ID của người kiểm tra",
+          "maxLength": 128
+        },
+        "image_path": {
+          "type": "string",
+          "description": "Đường dẫn lưu ảnh gốc",
+          "maxLength": 500
+        },
+        "scanned_at": {
+          "type": "string",
+          "description": "Thời gian quét thông tin theo giờ server",
+          "maxLength": 40
+        }
+      },
+      "required": ["inspector", "inspector_id", "scanned_at", "image_path"]
+    },
+    "Inspector": {
+      "title": "AuthorizedInspector",
+      "description": "Danh sách nhân viên / kỹ sư hàng hải được cấp quyền đăng nhập và bóc tách dữ liệu",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email công vụ của nhân viên",
+          "maxLength": 100
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Họ và tên nhân viên",
+          "maxLength": 100
+        },
+        "employee_id": {
+          "type": "string",
+          "description": "Mã số nhân viên",
+          "maxLength": 20
+        }
+      },
+      "required": ["email", "display_name", "employee_id"]
+    },
+    "MasterEquipment": {
+      "title": "MasterEquipment",
+      "description": "Thiết bị theo SFI chuẩn",
+      "type": "object",
+      "properties": {
+        "sfi": { "type": "string" },
+        "name": { "type": "string" },
+        "zone": { "type": "string" },
+        "comp_location": { "type": "string" }
+      },
+      "required": ["sfi", "name"]
+    }
+  },
+  "firestore": {
+    "/records/{recordId}": {
+      "schema": "Record",
+      "description": "Tập hợp các bản ghi biển tên thiết bị tàu thủy đã bóc tách và lưu kho"
+    },
+    "/inspectors/{inspectorId}": {
+      "schema": "Inspector",
+      "description": "Danh sách nhân viên kiểm định được cấp quyền truy cập"
+    },
+    "/master_equipment/{sfiId}": {
+      "schema": "MasterEquipment",
+      "description": "Danh mục thiết bị SFI chính"
+    }
+  }
+}

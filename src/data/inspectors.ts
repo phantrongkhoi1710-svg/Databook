@@ -1,0 +1,28 @@
+import { AuthorizedInspector } from '../types';
+
+export const INITIAL_INSPECTORS: AuthorizedInspector[] = [
+  { email: 'nguyen.van.huy@vard.com', display_name: 'Nguyễn Văn Huy', employee_id: '2995' },
+  { email: 'ngo.thinh.duy@vard.com', display_name: 'Ngô Thịnh Duy', employee_id: '8000' },
+  { email: 'lam.thi.thuy.trang@vard.com', display_name: 'Lâm Thị Thùy Trang', employee_id: '4006' },
+  { email: 'pham.le.thanh.an@vard.com', display_name: 'Phạm Lê Thành An', employee_id: '8000' },
+  { email: 'hoang.manh.thang@vard.com', display_name: 'Hoàng Mạnh Thắng', employee_id: '4426' },
+  { email: 'tran.van.chuyen@vard.com', display_name: 'Trần Văn Chuyền', employee_id: '2742' },
+  { email: 'nguyen.dong.hop@vard.com', display_name: 'Nguyễn Đồng Hợp', employee_id: '3750' },
+  { email: 'nguyen.danh.duy@vard.com', display_name: 'Nguyễn Danh Duy', employee_id: '2511' },
+  { email: 'dang.duy.hoang@vard.com', display_name: 'Đặng Duy Hoàng', employee_id: '4256' },
+  { email: 'nguyen.huy.thinh@vard.com', display_name: 'Nguyễn Huy Thịnh', employee_id: '2524' },
+  { email: 'tran.duc.huy@vard.com', display_name: 'Trần Đức Huy', employee_id: '4378' },
+  { email: 'nguyen.tran.hung@vard.com', display_name: 'Nguyễn Trần Hưng', employee_id: '2107' },
+  { email: 'to.my.bon@vard.com', display_name: 'Tô Mỹ Bồn', employee_id: '3809' },
+  { email: 'phan.trong.khoi@vard.com', display_name: 'Phan Trọng Khôi', employee_id: '4614' },
+  { email: 'nguyen.van.thao@vard.com', display_name: 'Nguyễn Văn Thảo', employee_id: '3436' },
+  { email: 'nguyen.ba.xuan.ky@vard.com', display_name: 'Nguyễn Bá Xuân Kỳ', employee_id: '8000' },
+  { email: 'tran.nguyen.phuoc@vard.com', display_name: 'Trần Nguyên Phước', employee_id: '4551' },
+  { email: 'tran.quoc@vard.com', display_name: 'Trần Quốc', employee_id: '2861' },
+  { email: 'ho.thanh.tuat@vard.com', display_name: 'Hồ Thanh Tuất', employee_id: '2698' },
+  { email: 'le.chau@vard.com', display_name: 'Lê Châu', employee_id: '2982' },
+  { email: 'nguyen.hung.phat@vard.com', display_name: 'Nguyễn Hưng Phát', employee_id: '8000' },
+  { email: 'nguyen.van.anh@vard.com', display_name: 'Nguyễn Văn Ánh', employee_id: '2313' },
+  { email: 'tran.thi.ngoc.bich@vard.com', display_name: 'Trần Thị Ngọc Bích', employee_id: '4455' },
+  { email: 'phantrongkhoi1710@gmail.com', display_name: 'Phan Trọng Khôi', employee_id: '4614' },
+];
