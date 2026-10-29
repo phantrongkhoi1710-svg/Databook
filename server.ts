@@ -527,6 +527,19 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
   });
 });
 
+// GET /api/auth/me - Validate current session token
+app.get('/api/auth/me', authenticate, (req: AuthenticatedRequest, res: Response) => {
+  res.json({
+    user: {
+      uid: req.user!.uid,
+      email: req.user!.email,
+      displayName: req.user!.name,
+      employee_id: req.user!.employee_id,
+      isAllowed: true,
+    },
+  });
+});
+
 // GET /api/images/:filename - Image access helper
 app.get('/api/images/:filename', (req: Request, res: Response) => {
   const filename = path.basename(req.params.filename);
@@ -1211,6 +1224,11 @@ app.get('/api/equipment/export-databook.zip', authenticate, async (_req: Request
     console.error('DataBook export error:', err);
     res.status(500).json({ error: 'Lỗi khi tạo thư mục DataBook ZIP: ' + err.message });
   }
+});
+
+// API 404 Catch-All Fallback to prevent Vite static middleware from returning 405 Method Not Allowed HTML
+app.all('/api/*', (_req: Request, res: Response) => {
+  res.status(404).json({ error: 'API endpoint không tồn tại hoặc phương thức không hợp lệ.' });
 });
 
 // Start Server
