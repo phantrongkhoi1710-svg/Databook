@@ -12,15 +12,22 @@ export interface ApiResponse<T = any> {
 
 export async function safeFetchJson<T = any>(
   url: string,
-  options?: RequestInit
+  options?: RequestInit,
+  retries = 1
 ): Promise<ApiResponse<T>> {
   try {
     const res = await fetch(url, options);
-    const contentType = res.headers.get('content-type') || '';
+    const text = await res.text();
 
-    // Check if the server returned JSON
-    if (contentType.includes('application/json')) {
-      const json = await res.json();
+    // Try parsing response as JSON
+    let json: any = null;
+    try {
+      json = JSON.parse(text);
+    } catch {
+      json = null;
+    }
+
+    if (json) {
       if (!res.ok) {
         return {
           ok: false,
@@ -38,9 +45,13 @@ export async function safeFetchJson<T = any>(
       };
     }
 
-    // Server returned HTML (e.g., warmup page, proxy 502/403, or 404 page)
-    const text = await res.text();
+    // Response was not JSON (e.g. HTML or plain text)
     if (!res.ok) {
+      if (retries > 0 && (res.status === 404 || res.status >= 500)) {
+        await new Promise((r) => setTimeout(r, 500));
+        return safeFetchJson<T>(url, options, retries - 1);
+      }
+
       if (res.status === 401 || res.status === 403) {
         return {
           ok: false,
@@ -48,20 +59,30 @@ export async function safeFetchJson<T = any>(
           error: 'Phiên làm việc đã hết hạn hoặc bạn chưa được cấp quyền.',
         };
       }
+      if (res.status === 404) {
+        return {
+          ok: false,
+          status: 404,
+          error: 'Không tìm thấy tài nguyên yêu cầu (Mã lỗi 404). Vui lòng làm mới trang hoặc thử lại.',
+        };
+      }
       return {
         ok: false,
         status: res.status,
-        error: `Máy chủ tạm thời chưa sẵn sàng (Mã lỗi ${res.status}). Vui lòng thử lại.`,
+        error: `Máy chủ chưa sẵn sàng (Mã lỗi ${res.status}). Vui lòng thử lại sau giây lát.`,
       };
     }
 
-    // Unexpected non-JSON successful response
     return {
       ok: false,
       status: res.status,
       error: 'Phản hồi từ máy chủ không đúng định dạng JSON.',
     };
   } catch (err: any) {
+    if (retries > 0) {
+      await new Promise((r) => setTimeout(r, 500));
+      return safeFetchJson<T>(url, options, retries - 1);
+    }
     return {
       ok: false,
       status: 0,
